@@ -12,6 +12,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app/Contents/Developer
+
       - name: Install XcodeGen
         run: brew install xcodegen
 
@@ -20,12 +23,12 @@ jobs:
 
       - name: Verify project
         run: |
-          ls -la
-          xcodebuild -list -project SimpleAE.xcodeproj
+          ls -la SimpleAE.xcodeproj
+          xcodebuild -list -project "$PWD/SimpleAE.xcodeproj"
 
       - name: Build (unsigned)
         run: |
-          xcodebuild -project SimpleAE.xcodeproj \
+          xcodebuild -project "$PWD/SimpleAE.xcodeproj" \
             -scheme SimpleAE \
             -sdk iphoneos \
             -configuration Release \
