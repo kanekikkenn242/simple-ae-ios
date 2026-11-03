@@ -18,6 +18,11 @@ jobs:
       - name: Generate Xcode project
         run: xcodegen generate
 
+      - name: Verify project
+        run: |
+          ls -la
+          xcodebuild -list -project SimpleAE.xcodeproj
+
       - name: Build (unsigned)
         run: |
           xcodebuild -project SimpleAE.xcodeproj \
